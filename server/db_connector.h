@@ -9,7 +9,7 @@
 
 class DBConnector {
 public:
-    DBConnector(size_t pool_size = 8);
+    DBConnector(size_t pool_size = 16);
     void put(const std::string& key, const std::string& value);
     bool get(const std::string& key, std::string& value);
     bool remove(const std::string& key);

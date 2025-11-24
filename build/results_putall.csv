@@ -1,0 +1,72 @@
+Workload: putall
+Total Requests: 479719
+Threads: 4
+Duration: 180s
+Throughput: 2665.11 req/s
+Average Response Time: 1.49916 ms
+
+
+Workload: putall
+Total Requests: 691568
+Threads: 8
+Duration: 180s
+Throughput: 3842.04 req/s
+Average Response Time: 2.08036 ms
+
+
+Workload: putall
+Total Requests: 769705
+Threads: 16
+Duration: 180s
+Throughput: 4276.14 req/s
+Average Response Time: 3.74562 ms
+
+
+Workload: putall
+Total Requests: 822855
+Threads: 32
+Duration: 180s
+Throughput: 4571.42 req/s
+Average Response Time: 7.00852 ms
+
+
+Workload: putall
+Total Requests: 862285
+Threads: 64
+Duration: 180s
+Throughput: 4790.47 req/s
+Average Response Time: 13.3859 ms
+
+
+Workload: putall
+Total Requests: 924538
+Threads: 128
+Duration: 180s
+Throughput: 5136.32 req/s
+Average Response Time: 24.9913 ms
+
+
+Workload: putall
+Total Requests: 965469
+Threads: 256
+Duration: 180s
+Throughput: 5363.72 req/s
+Average Response Time: 47.8484 ms
+
+
+Workload: putall
+Total Requests: 976949
+Threads: 512
+Duration: 180s
+Throughput: 5427.49 req/s
+Average Response Time: 94.7034 ms
+
+num threads - disk usage
+4 - 69
+8 - 75
+16 - 76.8
+32 - 78
+64 - 78.2
+128 - 78
+256 - 77.5
+512 - 77.7

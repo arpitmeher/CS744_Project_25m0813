@@ -1,0 +1,81 @@
+Workload: getpopular
+Total Requests: 580070
+Threads: 1
+Duration: 180s
+Throughput: 3222.61 req/s
+Average Response Time: 0.308841 ms
+
+
+Workload: getpopular
+Total Requests: 1073118
+Threads: 2
+Duration: 180s
+Throughput: 5961.77 req/s
+Average Response Time: 0.333989 ms
+
+
+Workload: getpopular
+Total Requests: 1653687
+Threads: 4
+Duration: 180s
+Throughput: 9187.15 req/s
+Average Response Time: 0.43367 ms
+
+
+Workload: getpopular
+Total Requests: 1969107
+Threads: 8
+Duration: 180s
+Throughput: 10939.5 req/s
+Average Response Time: 0.729747 ms
+
+
+Workload: getpopular
+Total Requests: 1997185
+Threads: 16
+Duration: 180s
+Throughput: 11095.5 req/s
+Average Response Time: 1.44256 ms
+
+
+Workload: getpopular
+Total Requests: 2016751
+Threads: 32
+Duration: 180s
+Throughput: 11204.2 req/s
+Average Response Time: 2.86035 ms
+
+
+Workload: getpopular
+Total Requests: 2027271
+Threads: 64
+Duration: 180s
+Throughput: 11262.6 req/s
+Average Response Time: 5.69628 ms
+
+
+Workload: getpopular
+Total Requests: 2006766
+Threads: 128
+Duration: 180s
+Throughput: 11148.7 req/s
+Average Response Time: 11.5104 ms
+
+
+# Ran fro 360 sec and used to check whether 180 sec give stable enough result
+Workload: getpopular
+Total Requests: 1166248
+Threads: 1
+Duration: 360s
+Throughput: 3239.58 req/s
+Average Response Time: 0.307236 ms
+
+
+Num threads - CPU % utilisation - AVG utilisation
+    1  -        18-40  -  29
+    2  -        50-55  -  53
+    4  -        75-85  -  80
+    8  -        90-92  -  91
+    16 -        93     -  93 
+    32 -        93     -  93
+    64 -        93     -  93

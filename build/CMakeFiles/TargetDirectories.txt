@@ -1,0 +1,4 @@
+/home/arpitmeher/CS744_Project_25m0813/build/CMakeFiles/kv_server.dir
+/home/arpitmeher/CS744_Project_25m0813/build/CMakeFiles/loadgen.dir
+/home/arpitmeher/CS744_Project_25m0813/build/CMakeFiles/edit_cache.dir
+/home/arpitmeher/CS744_Project_25m0813/build/CMakeFiles/rebuild_cache.dir

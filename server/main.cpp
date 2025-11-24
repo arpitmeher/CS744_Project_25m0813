@@ -1,14 +1,13 @@
 #include "httplib.h"
 #include "kv_cache.h"
 #include "db_connector.h"
-#include "stats.h"
 #include <regex>
 
 using namespace std;
 
 KVCache cache(1000);
 DBConnector db;
-Stats stats;
+
 
 bool is_valid_key(const std::string& key) {
     return !key.empty() && key.size() <= 64;
@@ -27,18 +26,14 @@ int main() {
     };
 
     svr.Post("/create", [](const httplib::Request& req, httplib::Response& res) {
-        stats.total_puts++;
         std::string key = req.get_param_value("key");
         std::string value = req.get_param_value("value");
      
         if (!is_valid_key(key) || !is_valid_value(value)) {
-            stats.invalid_puts++;
             res.status = 400;
             res.set_content("Invalid key or value", "text/plain");
             return;
         }
-
-        stats.valid_puts++;
         cache.put(key, value);
         db.put(key, value);
         res.set_content("Created", "text/plain");
@@ -73,10 +68,7 @@ int main() {
 
     svr.Get("/stats", [](const httplib::Request&, httplib::Response& res) {
         std::string report = "Cache Hits: " + std::to_string(cache.hits) +
-                             "\nCache Misses: " + std::to_string(cache.misses) +
-                             "\nTotal PUTs: " + std::to_string(stats.total_puts.load()) +
-                             "\nValid PUTs: " + std::to_string(stats.valid_puts.load()) +
-                             "\nInvalid PUTs: " + std::to_string(stats.invalid_puts.load());
+                             "\nCache Misses: " + std::to_string(cache.misses);
         res.set_content(report, "text/plain");
     });
 

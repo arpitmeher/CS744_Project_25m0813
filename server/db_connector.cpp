@@ -37,32 +37,49 @@ void DBConnector::release_connection(std::unique_ptr<sql::Connection>&& conn) {
 
 void DBConnector::put(const std::string& key, const std::string& value) {
     auto conn = acquire_connection();
-    auto stmt = conn->prepareStatement("REPLACE INTO kv_table (k, v) VALUES (?, ?)");
+
+    {
+    auto stmt = std::unique_ptr<sql::PreparedStatement>(
+        conn->prepareStatement("INSERT INTO kv_table (k, v) VALUES (?, ?) ON DUPLICATE KEY UPDATE v = VALUES(v)")
+    );
+
+
     stmt->setString(1, key);
     stmt->setString(2, value);
     stmt->execute();
+    }
     release_connection(std::move(conn));
 }
 
 bool DBConnector::get(const std::string& key, std::string& value) {
     auto conn = acquire_connection();
-    auto stmt = conn->prepareStatement("SELECT v FROM kv_table WHERE k = ?");
-    stmt->setString(1, key);
-    auto res = stmt->executeQuery();
     bool found = false;
+    {
+    auto stmt = std::unique_ptr<sql::PreparedStatement>(
+        conn->prepareStatement("SELECT v FROM kv_table WHERE k = ?")
+    );
+
+    stmt->setString(1, key);
+    std::unique_ptr<sql::ResultSet> res(stmt->executeQuery());
     if (res->next()) {
         value = res->getString("v");
         found = true;
     }
+}
     release_connection(std::move(conn));
     return found;
 }
 
 bool DBConnector::remove(const std::string& key) {
     auto conn = acquire_connection();
-    auto stmt = conn->prepareStatement("DELETE FROM kv_table WHERE k = ?");
+    int affected = 0;
+    {
+    std::unique_ptr<sql::PreparedStatement> stmt(
+        conn->prepareStatement("DELETE FROM kv_table WHERE k = ?")
+    );
     stmt->setString(1, key);
-    int affected = stmt->executeUpdate();  // Use executeUpdate() instead of execute()
+    int affected = stmt->executeUpdate();
+    }
     release_connection(std::move(conn));
     return affected > 0;
 }

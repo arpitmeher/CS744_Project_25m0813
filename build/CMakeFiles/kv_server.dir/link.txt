@@ -1,0 +1,1 @@
+/usr/bin/c++  -fsanitize=address -g CMakeFiles/kv_server.dir/server/main.cpp.o CMakeFiles/kv_server.dir/server/kv_cache.cpp.o CMakeFiles/kv_server.dir/server/db_connector.cpp.o -o kv_server  -lmysqlcppconn 
