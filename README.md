@@ -60,3 +60,24 @@ If your MySQL username or password differs, update them in `db_connector.cpp`:
 user = "your_user";
 password = "your_password";
 ```
+
+
+# To run experiments
+```bash
+# pin kv server on core 1 and 2 run following in build directory
+taskset -c 1-2 ./kv_server
+# To put the 100 popular keys in database (Uses CURL in for loop)
+./feed_keys.sh
+# To get process id of mysql server
+pgrep mysql
+# To pin mysql server on core 0
+sudo taskget -cp 0 <pid>
+# To send request using loadgen which is pinned on core 3-15
+taskset -c 3-15 ./loadgen --workload getpopular --threads 2 --duration 180 >> results_get_pop.csv
+# run top to see cpu and mem usage
+top
+# run htop to see cpu usage of each core
+htop
+# optionally log disk usage using
+iostat -x 1 > disk_usage.log &
+```
